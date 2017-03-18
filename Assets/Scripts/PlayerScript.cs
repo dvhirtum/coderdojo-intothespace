@@ -12,5 +12,11 @@ public class PlayerScript : MonoBehaviour {
 
 		Rigidbody2D rigidBody = GetComponent<Rigidbody2D>();
 		rigidBody.velocity = movement * Speed;
+
+		rigidBody.position = new Vector2
+		(
+			Mathf.Clamp(rigidBody.position.x, -3, 3),
+			Mathf.Clamp(rigidBody.position.y, -4.5f, 2)
+		);
 	}
 }
