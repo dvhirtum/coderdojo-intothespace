@@ -5,6 +5,22 @@ public class PlayerScript : MonoBehaviour
 	public float Speed;
 	public GameObject Explosion;
 
+	public float FireRate = 0.5f;
+	public GameObject LaserBolt;
+	public Transform ShotSpawn;
+
+	private float nextFire = 0.0f;
+
+	void Update()
+	{
+		if (Time.time > nextFire)
+		{
+			nextFire = Time.time + FireRate;
+			Instantiate(LaserBolt, ShotSpawn.position, ShotSpawn.rotation);
+			GetComponent<AudioSource>().Play();
+		}
+	}
+
 	void FixedUpdate() 
 	{
 		float moveHorizontal = Input.GetAxis("Horizontal");
