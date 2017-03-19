@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 
-public class PlayerScript : MonoBehaviour {
+public class PlayerScript : MonoBehaviour 
+{
 	public float Speed;
 
-	void FixedUpdate() {
+	void FixedUpdate() 
+	{
 		float moveHorizontal = Input.GetAxis("Horizontal");
 		float moveVertical = Input.GetAxis("Vertical");
 		Vector2 movement = new Vector2(moveHorizontal, moveVertical);

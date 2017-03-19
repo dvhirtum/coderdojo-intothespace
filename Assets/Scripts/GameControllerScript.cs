@@ -11,17 +11,16 @@ public class EnemyType
 	public float WaveWait;
 }
 
-public class GameControllerScript : MonoBehaviour {
+public class GameControllerScript : MonoBehaviour 
+{
 	public EnemyType[] Enemies;
 
-	void Start () {
-		foreach (EnemyType enemyType in Enemies) {
+	void Start () 
+	{
+		foreach (EnemyType enemyType in Enemies) 
+		{
 			StartCoroutine(spawnWaves(enemyType));
 		}
-	}
-	
-	void Update () {
-		
 	}
 
 	IEnumerator spawnWaves(EnemyType enemyType)
