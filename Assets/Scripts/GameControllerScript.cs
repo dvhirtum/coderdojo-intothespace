@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class EnemyType 
@@ -20,6 +21,14 @@ public class GameControllerScript : MonoBehaviour
 		foreach (EnemyType enemyType in Enemies) 
 		{
 			StartCoroutine(spawnWaves(enemyType));
+		}
+	}
+
+	void Update () 
+	{
+		if (Input.GetKey("r"))
+		{
+			SceneManager.LoadScene("Scene_01", LoadSceneMode.Single);
 		}
 	}
 
