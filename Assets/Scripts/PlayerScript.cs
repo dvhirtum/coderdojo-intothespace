@@ -3,6 +3,7 @@
 public class PlayerScript : MonoBehaviour 
 {
 	public float Speed;
+	public GameObject Explosion;
 
 	void FixedUpdate() 
 	{
@@ -18,5 +19,14 @@ public class PlayerScript : MonoBehaviour
 			Mathf.Clamp(rigidBody.position.x, -3, 3),
 			Mathf.Clamp(rigidBody.position.y, -4.5f, 2)
 		);
+	}
+	
+	void OnTriggerEnter2D(Collider2D other)
+	{
+		if (other.tag == "Enemy") 
+		{
+			Instantiate (Explosion, transform.position , transform.rotation);
+			Destroy(gameObject);
+		}
 	}
 }
