@@ -26,6 +26,11 @@ public class PlayerScript : MonoBehaviour
 		if (other.tag == "Enemy" || other.tag == "EnemyLaser") 
 		{
 			Instantiate (Explosion, transform.position , transform.rotation);
+
+			GameObject gameController = GameObject.FindWithTag("GameController");
+			GameControllerScript script = gameController.GetComponent<GameControllerScript>();
+			script.GameOver();
+
 			Destroy(gameObject);
 		}
 	}

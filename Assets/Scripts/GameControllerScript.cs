@@ -14,7 +14,24 @@ public class EnemyType
 
 public class GameControllerScript : MonoBehaviour 
 {
+	public GUIText ScoreText;
+	public GUIText GameOverText;
+	public GUIText FinalScoreText;
+	public GUIText ReplayText;
+
 	public EnemyType[] Enemies;
+
+	private int score;
+	private bool gameOver;
+
+	public void IncrementScore(int value)
+	{
+		score += value;
+	}
+
+	public void GameOver(){
+		gameOver = true;
+	}
 
 	void Start () 
 	{
@@ -29,6 +46,18 @@ public class GameControllerScript : MonoBehaviour
 		if (Input.GetKey("r"))
 		{
 			SceneManager.LoadScene("Scene_01", LoadSceneMode.Single);
+		}
+	}
+
+	void FixedUpdate()
+	{
+		ScoreText.text = "SCORE: " + score;
+
+		if (gameOver == true)
+		{
+			GameOverText.text = "GAME OVER";
+			FinalScoreText.text = "" + score;
+			ReplayText.text = "PRESS R TO REPLAY";
 		}
 	}
 
