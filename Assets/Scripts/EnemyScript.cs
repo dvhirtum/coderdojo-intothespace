@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class EnemyBlueScript : MonoBehaviour 
+public class EnemyScript : MonoBehaviour 
 {
 	public float Speed;
 	
