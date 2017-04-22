@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 [System.Serializable]
-public class EnemyType 
+public class Wave 
 {
 	public GameObject Enemy;
 	public int Count;
@@ -19,7 +19,7 @@ public class GameControllerScript : MonoBehaviour
 	public GUIText FinalScoreText;
 	public GUIText ReplayText;
 
-	public EnemyType[] Enemies;
+	public Wave[] Waves;
 
 	private int score;
 	private bool gameOver;
@@ -35,9 +35,9 @@ public class GameControllerScript : MonoBehaviour
 
 	void Start () 
 	{
-		foreach (EnemyType enemyType in Enemies) 
+		foreach (Wave wave in Waves) 
 		{
-			StartCoroutine(spawnWaves(enemyType));
+			StartCoroutine(spawnWaves(wave));
 		}
 	}
 
@@ -61,20 +61,20 @@ public class GameControllerScript : MonoBehaviour
 		}
 	}
 
-	IEnumerator spawnWaves(EnemyType enemyType)
+	IEnumerator spawnWaves(Wave wave)
 	{
-		yield return new WaitForSeconds (enemyType.StartWait);
+		yield return new WaitForSeconds (wave.StartWait);
 
 		while (true)
 		{
-			for (int i = 0; i < enemyType.Count; i++)
+			for (int i = 0; i < wave.Count; i++)
 			{
 				Vector2 spawnPosition = new Vector2 (Random.Range (-3, 3), 6);
 				Quaternion spawnRotation = Quaternion.identity;
-				Instantiate (enemyType.Enemy, spawnPosition, spawnRotation);
-				yield return new WaitForSeconds (enemyType.SpawnWait);
+				Instantiate (wave.Enemy, spawnPosition, spawnRotation);
+				yield return new WaitForSeconds (wave.SpawnWait);
 			}
-			yield return new WaitForSeconds (enemyType.WaveWait);
+			yield return new WaitForSeconds (wave.WaveWait);
 		}
 	}
 }
