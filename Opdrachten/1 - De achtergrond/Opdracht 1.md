@@ -1,3 +1,5 @@
+#Opdracht 1 - De achtergrond
+
 * Maak een leeg gameobject onder Main Camera met de volgende properties:
     * Name: Stars
     * Position: X=0, Y=9, Z=10
