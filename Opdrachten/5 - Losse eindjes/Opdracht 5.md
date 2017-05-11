@@ -157,6 +157,7 @@ public class GameControllerScript : MonoBehaviour
 ```
 * Sleep de vier text objecten die je onder de main camera hebt gemaakt naar de GameController properties met dezelfde naam
 
+* Geef GameController de tag "GameController"
 * Pas LaserHitScript aan:
 ```cs
 using UnityEngine;
@@ -197,6 +198,46 @@ public class LaserHitScript : MonoBehaviour
     * EnemyBlue: 15 
     * EnemyGreen: 25
     * EnemyRed: 40
+* Pas PlayerScript aan:
+```cs
+using UnityEngine;
+
+public class PlayerScript : MonoBehaviour 
+{
+	public float Speed;
+	public GameObject Explosion;
+
+	void FixedUpdate() 
+	{
+		float moveHorizontal = Input.GetAxis("Horizontal");
+		float moveVertical = Input.GetAxis("Vertical");
+		Vector2 movement = new Vector2(moveHorizontal, moveVertical);
+
+		Rigidbody2D rigidBody = GetComponent<Rigidbody2D>();
+		rigidBody.velocity = movement * Speed;
+
+		rigidBody.position = new Vector2
+		(
+			Mathf.Clamp(rigidBody.position.x, -3, 3),
+			Mathf.Clamp(rigidBody.position.y, -4.5f, 2)
+		);
+	}
+	
+	void OnTriggerEnter2D(Collider2D other)
+	{
+		if (other.tag == "Enemy" || other.tag == "EnemyLaser") 
+		{
+			Instantiate (Explosion, transform.position , transform.rotation);
+
+			GameObject gameController = GameObject.FindWithTag("GameController");
+			GameControllerScript script = gameController.GetComponent<GameControllerScript>();
+			script.GameOver();
+			
+			Destroy(gameObject);
+		}
+	}
+}
+```
 
 * Speel het spel
     * Nu hoor je muziek, maken de lasers geluid bij het schieten, wordt er score bijgehouden en getoond en kun je herstarten als je af bent
